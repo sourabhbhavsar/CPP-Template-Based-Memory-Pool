@@ -1,0 +1,36 @@
+#ifndef MemoryPool_h
+#define MemoryPool_h
+
+#include <Poolfactory.h>
+namespace MP
+{
+    template < typename T >
+    class MemoryPool
+    {
+        public:
+        static T* getNext()
+        {
+            T *pStruct = mRecordFactory.getNext();
+            return pStruct;
+        }
+
+        static void clear()
+        {
+            mRecordFactory.clear();
+        }
+
+        static void clearAndDestroy()
+        {
+            mRecordFactory.clearAndDestroy();
+        }
+
+        private:
+        static PF::PoolFactory <T> mRecordFactory;
+    }; // end of class MemoryPool
+
+ template<typename T>
+ PF::PoolFactory <T> MemoryPool<T>::mRecordFactory;
+
+} // namespace MP
+
+#endif
